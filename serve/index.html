@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        width: 99%;
+        height: 90vh;
+        background-color: #eee;
+      }
+
+      .create {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+
+        padding: 1rem;
+      }
+
+      #text {
+        font-size: 48px;
+      }
+    </style>
+  </head>
+  <body>
+    <span id="text"></span>
+
+    <div class="create">
+      <input id="in" type="text" />
+      <button id="create">create</button>
+    </div>
+
+    <script>
+      const { search } = document.location;
+
+      const input = document.getElementById("in");
+      const create = document.getElementById("create");
+
+      function process() {
+        document.location.search = btoa(input.value);
+      }
+
+      create.addEventListener("click", process);
+      input.addEventListener("keypress", event => {
+        if (event.keyCode === 13) {
+          process();
+        }
+      });
+
+      const element = document.getElementById("text");
+
+      if (search) {
+        element.innerText = atob(search.substring(1));
+      }
+    </script>
+  </body>
+</html>
